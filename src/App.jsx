@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import { supabase } from './lib/supabase';
 import { fetchAll, upsertBean, deleteBean, upsertItem, deleteItem } from './lib/db';
 import PublicSite from './components/public/PublicSite';
 import AdminLogin from './components/admin/AdminLogin';
@@ -9,14 +8,6 @@ export default function App() {
   const [data, setData] = useState(null);
   const [loadError, setLoadError] = useState(null);
   const [mode, setMode] = useState('public');
-  const [session, setSession] = useState(undefined); // undefined = 確認中
-
-  // Supabase セッション監視
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => setSession(session));
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
-    return () => subscription.unsubscribe();
-  }, []);
 
   // 初回データ取得
   const reload = useCallback(async () => {
@@ -98,7 +89,7 @@ export default function App() {
     );
   }
 
-  if (mode === 'admin' && session) {
+  if (mode === 'admin') {
     return (
       <AdminPanel
         data={data}

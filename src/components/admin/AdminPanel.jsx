@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { supabase } from '../../lib/supabase';
 import AdminDashboard from './AdminDashboard';
 import AdminBeans from './AdminBeans';
 import AdminSimpleEditor from './AdminSimpleEditor';
@@ -45,16 +44,11 @@ const TABS = ['ダッシュボード', '豆管理', '農園管理', '産地管�
 export default function AdminPanel({ data, updateBeans, updateFarms, updateCountries, updateProcesses, updateTerms, onLogout }) {
   const [tab, setTab] = useState('ダッシュボード');
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    onLogout();
-  };
-
   return (
     <div style={{ backgroundColor: '#f0ebe4', minHeight: '100vh' }}>
       <header className="bg-stone-800 text-white px-6 py-3 flex items-center justify-between font-sans-jp">
         <span className="font-serif-jp text-sm tracking-wide">Bean Profile 管理画面</span>
-        <button type="button" onClick={handleLogout} className="text-[11px] text-stone-300 hover:text-white tracking-widest cursor-pointer">
+        <button type="button" onClick={onLogout} className="text-[11px] text-stone-300 hover:text-white tracking-widest cursor-pointer">
           閲覧サイトへ戻る
         </button>
       </header>
