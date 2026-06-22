@@ -1,0 +1,21 @@
+{
+  "name": "About Us Coffee",
+  "short_name": "Bean Profile",
+  "description": "About Us Coffee の豆プロファイル",
+  "start_url": "/aboutus-beans-profile/",
+  "display": "standalone",
+  "background_color": "#f4efe9",
+  "theme_color": "#292524",
+  "icons": [
+    {
+      "src": "/aboutus-beans-profile/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/aboutus-beans-profile/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
