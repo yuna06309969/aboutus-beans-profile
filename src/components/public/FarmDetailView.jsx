@@ -4,12 +4,12 @@ import WikiText from '../common/WikiText';
 import LinkedText from '../common/LinkedText';
 import EsmeraldaMap from './EsmeraldaMap';
 
-export default function FarmDetailView({ farm, beans, onBack, onSelectBean, onNavigate }) {
+export default function FarmDetailView({ farm, beans, onBack, onSelectBean, onNavigate, backLabel }) {
   const related = beans.filter((b) => b.region && b.region.includes(`farm:${farm.slug}`));
   return (
     <div>
       <div onClick={onBack} className="cursor-pointer text-xs text-stone-400 hover:text-stone-600 mb-6 tracking-wide">
-        ← 農園一覧へ戻る
+        ← {backLabel ?? '農園一覧へ戻る'}
       </div>
       <div className="border-l-2 border-l-stone-300 pl-6">
         <h2 className="font-serif-jp text-2xl mb-5">{farm.name}</h2>

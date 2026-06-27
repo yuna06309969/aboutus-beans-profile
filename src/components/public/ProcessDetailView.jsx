@@ -23,12 +23,12 @@ function StepsDiagram({ steps }) {
   );
 }
 
-export default function ProcessDetailView({ process, beans, onBack, onSelectBean, onNavigate }) {
+export default function ProcessDetailView({ process, beans, onBack, onSelectBean, onNavigate, backLabel }) {
   const related = beans.filter((b) => b.process && b.process.includes(`process:${process.slug}`));
   return (
     <div>
       <div onClick={onBack} className="cursor-pointer text-xs text-stone-400 hover:text-stone-600 mb-6 tracking-wide">
-        ← 精製方法一覧へ戻る
+        ← {backLabel ?? '精製方法一覧へ戻る'}
       </div>
       <div className="border-l-2 border-l-stone-300 pl-6">
         <div className="text-[10px] tracking-widest text-stone-400 mb-1 uppercase">{process.category}</div>

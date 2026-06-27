@@ -2,7 +2,7 @@ import SectionBlock from '../common/SectionBlock';
 import WikiText from '../common/WikiText';
 import Field from '../common/Field';
 
-export default function ProjectDetailView({ project, beans, farms, onBack, onSelectBean, onNavigate }) {
+export default function ProjectDetailView({ project, beans, farms, onBack, onSelectBean, onNavigate, backLabel }) {
   const relatedBeans = beans.filter(
     (b) => b.description_ja?.includes(`project:${project.slug}`) ||
            b.region?.includes(`project:${project.slug}`)
@@ -15,7 +15,7 @@ export default function ProjectDetailView({ project, beans, farms, onBack, onSel
   return (
     <div>
       <div onClick={onBack} className="cursor-pointer text-xs text-stone-400 hover:text-stone-600 mb-6 tracking-wide">
-        ← 一覧へ戻る
+        ← {backLabel ?? '一覧へ戻る'}
       </div>
       <div className="border-l-2 border-l-stone-300 pl-6">
         {project.category && (

@@ -19,12 +19,28 @@ const TABS = [
 export default function PublicSite({ data, onOpenAdmin }) {
   const [tab, setTab] = useState('beans');
   const [detail, setDetail] = useState(null);
+  // 履歴スタック: [{tab, detail}] — 遷移前の状態を積む
+  const [navHistory, setNavHistory] = useState([]);
 
   const navigateToDetail = (type, id) => {
+    setNavHistory((prev) => [...prev, { tab, detail }]);
     setTab(type);
     setDetail({ type, id });
   };
+
+  const goBack = () => {
+    setNavHistory((prev) => {
+      const previous = prev[prev.length - 1];
+      if (previous) {
+        setTab(previous.tab);
+        setDetail(previous.detail);
+      }
+      return prev.slice(0, -1);
+    });
+  };
+
   const goTab = (t) => {
+    setNavHistory([]);
     setTab(t);
     setDetail(null);
   };
@@ -34,32 +50,32 @@ export default function PublicSite({ data, onOpenAdmin }) {
     if (detail.type === 'beans') {
       const bean = data.beans.find((b) => String(b.id) === String(detail.id));
       content = bean
-        ? <BeanDetailView bean={bean} onBack={() => setDetail(null)} onNavigate={navigateToDetail} />
+        ? <BeanDetailView bean={bean} onBack={goBack} onNavigate={navigateToDetail} backLabel={backLabel} />
         : <p>見つかりません</p>;
     } else if (detail.type === 'countries') {
       const c = data.countries.find((c) => c.slug === detail.id);
       content = c
-        ? <CountryDetailView country={c} beans={data.beans} onBack={() => setDetail(null)} onSelectBean={(id) => navigateToDetail('beans', id)} />
+        ? <CountryDetailView country={c} beans={data.beans} onBack={goBack} onSelectBean={(id) => navigateToDetail('beans', id)} backLabel={backLabel} />
         : <p>見つかりません</p>;
     } else if (detail.type === 'farms') {
       const f = data.farms.find((f) => f.slug === detail.id);
       content = f
-        ? <FarmDetailView farm={f} beans={data.beans} onBack={() => setDetail(null)} onSelectBean={(id) => navigateToDetail('beans', id)} onNavigate={navigateToDetail} />
+        ? <FarmDetailView farm={f} beans={data.beans} onBack={goBack} onSelectBean={(id) => navigateToDetail('beans', id)} onNavigate={navigateToDetail} backLabel={backLabel} />
         : <p>見つかりません</p>;
     } else if (detail.type === 'processes') {
       const p = data.processes.find((p) => p.slug === detail.id);
       content = p
-        ? <ProcessDetailView process={p} beans={data.beans} onBack={() => setDetail(null)} onSelectBean={(id) => navigateToDetail('beans', id)} onNavigate={navigateToDetail} />
+        ? <ProcessDetailView process={p} beans={data.beans} onBack={goBack} onSelectBean={(id) => navigateToDetail('beans', id)} onNavigate={navigateToDetail} backLabel={backLabel} />
         : <p>見つかりません</p>;
     } else if (detail.type === 'terms') {
       const t = data.terms.find((t) => t.slug === detail.id);
       content = t
-        ? <TermDetailView term={t} beans={data.beans} onBack={() => setDetail(null)} onSelectBean={(id) => navigateToDetail('beans', id)} onNavigate={navigateToDetail} />
+        ? <TermDetailView term={t} beans={data.beans} onBack={goBack} onSelectBean={(id) => navigateToDetail('beans', id)} onNavigate={navigateToDetail} backLabel={backLabel} />
         : <p>見つかりません</p>;
     } else if (detail.type === 'projects') {
       const proj = (data.projects ?? []).find((p) => p.slug === detail.id);
       content = proj
-        ? <ProjectDetailView project={proj} beans={data.beans} farms={data.farms} onBack={() => setDetail(null)} onSelectBean={(id) => navigateToDetail('beans', id)} onNavigate={navigateToDetail} />
+        ? <ProjectDetailView project={proj} beans={data.beans} farms={data.farms} onBack={goBack} onSelectBean={(id) => navigateToDetail('beans', id)} onNavigate={navigateToDetail} backLabel={backLabel} />
         : <p>見つかりません</p>;
     }
   } else if (tab === 'beans') {
@@ -117,6 +133,18 @@ export default function PublicSite({ data, onOpenAdmin }) {
       />
     );
   }
+
+  // 戻るラベル: 履歴があれば直前のページ種別を表示
+  const backLabel = (() => {
+    if (!navHistory.length) return null;
+    const prev = navHistory[navHistory.length - 1];
+    if (prev.detail) {
+      const labels = { beans: '豆', countries: '産地', farms: '農園', processes: '精製方法', terms: '用語集', projects: 'プロジェクト' };
+      return labels[prev.detail.type] ?? '前のページ';
+    }
+    const tabLabels = { beans: '豆一覧', countries: '産地一覧', farms: '農園一覧', processes: '精製方法一覧', terms: '用語集' };
+    return tabLabels[prev.tab] ?? '前のページ';
+  })();
 
   return (
     <div style={{ backgroundColor: '#f4efe9', color: '#2a2220', minHeight: '100vh' }}>
