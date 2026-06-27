@@ -7,15 +7,16 @@ function stripMeta(obj) {
 }
 
 export async function fetchAll() {
-  const [beans, farms, countries, processes, terms] = await Promise.all([
+  const [beans, farms, countries, processes, terms, projects] = await Promise.all([
     supabase.from('beans').select('*'),
     supabase.from('farms').select('*'),
     supabase.from('countries').select('*'),
     supabase.from('processes').select('*'),
     supabase.from('terms').select('*'),
+    supabase.from('projects').select('*'),
   ]);
 
-  for (const res of [beans, farms, countries, processes, terms]) {
+  for (const res of [beans, farms, countries, processes, terms, projects]) {
     if (res.error) throw new Error(res.error.message);
   }
 
@@ -25,6 +26,7 @@ export async function fetchAll() {
     countries: countries.data ?? [],
     processes: processes.data ?? [],
     terms: terms.data ?? [],
+    projects: projects.data ?? [],
   };
 }
 

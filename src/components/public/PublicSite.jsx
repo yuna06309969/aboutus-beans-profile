@@ -6,6 +6,7 @@ import CountryDetailView from './CountryDetailView';
 import FarmDetailView from './FarmDetailView';
 import ProcessDetailView from './ProcessDetailView';
 import TermDetailView from './TermDetailView';
+import ProjectDetailView from './ProjectDetailView';
 
 const TABS = [
   { key: 'beans', label: '豆一覧' },
@@ -48,12 +49,17 @@ export default function PublicSite({ data, onOpenAdmin }) {
     } else if (detail.type === 'processes') {
       const p = data.processes.find((p) => p.slug === detail.id);
       content = p
-        ? <ProcessDetailView process={p} beans={data.beans} onBack={() => setDetail(null)} onSelectBean={(id) => navigateToDetail('beans', id)} />
+        ? <ProcessDetailView process={p} beans={data.beans} onBack={() => setDetail(null)} onSelectBean={(id) => navigateToDetail('beans', id)} onNavigate={navigateToDetail} />
         : <p>見つかりません</p>;
     } else if (detail.type === 'terms') {
       const t = data.terms.find((t) => t.slug === detail.id);
       content = t
-        ? <TermDetailView term={t} beans={data.beans} onBack={() => setDetail(null)} onSelectBean={(id) => navigateToDetail('beans', id)} />
+        ? <TermDetailView term={t} beans={data.beans} onBack={() => setDetail(null)} onSelectBean={(id) => navigateToDetail('beans', id)} onNavigate={navigateToDetail} />
+        : <p>見つかりません</p>;
+    } else if (detail.type === 'projects') {
+      const proj = (data.projects ?? []).find((p) => p.slug === detail.id);
+      content = proj
+        ? <ProjectDetailView project={proj} beans={data.beans} farms={data.farms} onBack={() => setDetail(null)} onSelectBean={(id) => navigateToDetail('beans', id)} onNavigate={navigateToDetail} />
         : <p>見つかりません</p>;
     }
   } else if (tab === 'beans') {

@@ -7,6 +7,6 @@ export const STATUS_COLORS = {
   '終売': 'border-l-stone-200',
 };
 
-export const TYPE_PATH = { country: 'countries', farm: 'farms', process: 'processes', term: 'terms' };
+export const TYPE_PATH = { country: 'countries', farm: 'farms', process: 'processes', term: 'terms', project: 'projects' };
 
 export const STORAGE_KEY = 'bp_data_v1';

@@ -62,6 +62,7 @@ export default function App() {
   const updateCountries = useCallback(makeUpdater('countries', 'countries'), [makeUpdater]);
   const updateProcesses = useCallback(makeUpdater('processes', 'processes'), [makeUpdater]);
   const updateTerms     = useCallback(makeUpdater('terms',     'terms'),     [makeUpdater]);
+  const updateProjects  = useCallback(makeUpdater('projects',  'projects'),  [makeUpdater]);
 
   // --- レンダリング ---
   if (loadError) {
@@ -98,6 +99,7 @@ export default function App() {
         updateCountries={updateCountries}
         updateProcesses={updateProcesses}
         updateTerms={updateTerms}
+        updateProjects={updateProjects}
         onLogout={() => setMode('public')}
       />
     );
