@@ -34,7 +34,7 @@ function parseInline(text, onNavigate, keyOffset = 0) {
 export default function WikiText({ text, onNavigate }) {
   if (!text) return null;
 
-  const paragraphs = text.split(/\n\n+/);
+  const paragraphs = text.split(/\n+/);
   if (paragraphs.length === 1) {
     return <span>{parseInline(text, onNavigate)}</span>;
   }

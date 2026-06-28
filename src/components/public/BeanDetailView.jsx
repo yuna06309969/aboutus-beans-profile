@@ -28,31 +28,31 @@ export default function BeanDetailView({ bean, onBack, onNavigate, backLabel }) 
           <WikiText text={bean.description_ja} onNavigate={onNavigate} />
           {bean.description_en && (
             <div className="text-stone-500 mt-3 italic">
-              {bean.description_en.split(/\n\n+/).map((p, i) => (
+              {bean.description_en.split(/\n+/).map((p, i) => (
                 <p key={i} className={i > 0 ? 'mt-3' : ''}>{p}</p>
               ))}
             </div>
           )}
         </SectionBlock>
         <SectionBlock title="テイスト">
-          {bean.taste_ja && bean.taste_ja.split(/\n\n+/).map((p, i) => (
+          {bean.taste_ja && bean.taste_ja.split(/\n+/).map((p, i) => (
             <p key={i} className={i > 0 ? 'mt-3' : ''}>{p}</p>
           ))}
           {bean.taste_en && (
             <div className="text-stone-500 mt-3 italic">
-              {bean.taste_en.split(/\n\n+/).map((p, i) => (
+              {bean.taste_en.split(/\n+/).map((p, i) => (
                 <p key={i} className={i > 0 ? 'mt-3' : ''}>{p}</p>
               ))}
             </div>
           )}
         </SectionBlock>
         <SectionBlock title="詳細">
-          {bean.detail_ja && bean.detail_ja.split(/\n\n+/).map((p, i) => (
+          {bean.detail_ja && bean.detail_ja.split(/\n+/).map((p, i) => (
             <p key={i} className={i > 0 ? 'mt-3' : ''}>{p}</p>
           ))}
           {bean.detail_en && (
             <div className="text-stone-500 mt-3 italic">
-              {bean.detail_en.split(/\n\n+/).map((p, i) => (
+              {bean.detail_en.split(/\n+/).map((p, i) => (
                 <p key={i} className={i > 0 ? 'mt-3' : ''}>{p}</p>
               ))}
             </div>
