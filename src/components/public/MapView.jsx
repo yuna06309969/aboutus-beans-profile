@@ -12,8 +12,7 @@ L.Icon.Default.mergeOptions({
 });
 
 const WORLD_CENTER = [-5, 115];
-// 北70°/南-10°に制限（農園エリアに集中、グリーンランド継ぎ目を排除）
-const WORLD_BOUNDS = [[-12, -185], [72, 185]];
+const WORLD_BOUNDS = [[-90, -185], [90, 185]];
 
 const LAND_STYLE  = { fillColor: '#e8e0d5', fillOpacity: 1, color: '#b8b0a0', weight: 0.5 };
 const RIVER_STYLE = { color: '#89b4c8', weight: 1, opacity: 0.7, fill: false };
