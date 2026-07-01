@@ -215,7 +215,7 @@ export default function MapView({ countries, farms, beans, onNavigate }) {
       {/* マップ */}
       <div
         className="rounded-lg overflow-hidden"
-        style={{ height: 'clamp(220px, 45vw, 58vh)', boxShadow: '0 4px 20px rgba(0,0,0,0.12)', position: 'relative' }}
+        style={{ height: 'clamp(220px, 35vw, 56vh)', boxShadow: '0 4px 20px rgba(0,0,0,0.12)', position: 'relative' }}
       >
         <div style={{ position: 'absolute', top: '-70px', left: 0, right: 0, bottom: '-20px' }}>
         <MapContainer
