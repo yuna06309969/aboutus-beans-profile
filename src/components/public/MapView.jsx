@@ -136,7 +136,7 @@ export default function MapView({ countries, farms, beans, onNavigate }) {
   const countriesWithCoords = countries.filter((c) => c.lat && c.lng);
 
   const breadcrumb = [
-    { label: '🌍 世界', onClick: () => { setLevel('world'); setSelectedCountry(null); setSelectedRegion(null); setFlyTarget({ lat: 10, lng: 80, zoom: 2 }); } },
+    { label: '🌍 世界', onClick: () => { setLevel('world'); setSelectedCountry(null); setSelectedRegion(null); setFlyTarget({ lat: -5, lng: 60, zoom: 1 }); } },
     selectedCountry && { label: `${selectedCountry.flag} ${selectedCountry.name}`, onClick: () => { setLevel('country'); setSelectedRegion(null); setFlyTarget({ lat: selectedCountry.lat, lng: selectedCountry.lng, zoom: selectedCountry.zoom ?? 5 }); } },
     selectedRegion  && { label: selectedRegion, onClick: null },
   ].filter(Boolean);
@@ -167,11 +167,11 @@ export default function MapView({ countries, farms, beans, onNavigate }) {
       </div>
 
       {/* マップ */}
-      <div className="rounded-lg overflow-hidden" style={{ height: 'clamp(240px, 45vw, 62vh)', boxShadow: '0 4px 20px rgba(0,0,0,0.12)' }}>
+      <div className="rounded-lg overflow-hidden" style={{ height: 'clamp(240px, 45vw, 58vh)', boxShadow: '0 4px 20px rgba(0,0,0,0.12)' }}>
         <MapContainer
-          center={[10, 80]}
+          center={[-5, 60]}
           zoom={1}
-          style={{ height: '100%', width: '100%', background: `url(${import.meta.env.BASE_URL}無題18.png) center/cover` }}
+          style={{ height: 'calc(100% + 40px)', marginTop: '-40px', width: '100%', background: `url(${import.meta.env.BASE_URL}無題18.png) center/cover` }}
           dragging={false}
           scrollWheelZoom={false}
           doubleClickZoom={false}
