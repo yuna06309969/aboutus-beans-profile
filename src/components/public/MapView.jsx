@@ -210,7 +210,7 @@ export default function MapView({ countries, farms, beans, onNavigate }) {
       {/* マップ — 外側でclip、内側を上に35px上げて継ぎ目を隠す */}
       <div
         className="rounded-lg overflow-hidden"
-        style={{ height: 'clamp(240px, 45vw, 58vh)', position: 'relative', boxShadow: '0 4px 20px rgba(0,0,0,0.12)' }}
+        style={{ height: 'clamp(220px, 45vw, 58vh)', position: 'relative', boxShadow: '0 4px 20px rgba(0,0,0,0.12)' }}
       >
         <div style={{ position: 'absolute', top: '-70px', left: 0, right: 0, bottom: 0 }}>
           <MapContainer
