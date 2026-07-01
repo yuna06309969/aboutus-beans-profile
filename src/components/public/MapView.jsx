@@ -52,6 +52,7 @@ function MapSetup({ onWorldZoom }) {
       ['landPane', 250],
       ['hillPane', 255],
       ['riverPane', 260],
+      ['labelPane', 450],
     ].forEach(([name, z]) => {
       if (!map.getPane(name)) {
         const pane = map.createPane(name);
@@ -253,6 +254,14 @@ export default function MapView({ countries, farms, beans, onNavigate }) {
 
           {/* 湖 */}
           {lakeGeo && <GeoJSON data={lakeGeo} style={LAKE_STYLE} pane="riverPane" />}
+
+          {/* ラベル（大陸名→国名、ズームで自動切替） */}
+          <TileLayer
+            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png"
+            opacity={0.85}
+            pane="labelPane"
+            attribution=""
+          />
 
           {/* 世界ビュー：国マーカー */}
           {level === 'world' && countriesWithCoords.map(c => (
