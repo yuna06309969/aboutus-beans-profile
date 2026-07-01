@@ -11,7 +11,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 });
 
-const WORLD_CENTER = [-5, 80];
+const WORLD_CENTER = [-5, 130];
 const WORLD_ZOOM = 1;
 const RESTRICTED_BOUNDS = [[-75, -180], [75, 180]];
 
