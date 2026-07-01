@@ -167,10 +167,10 @@ export default function MapView({ countries, farms, beans, onNavigate }) {
       </div>
 
       {/* マップ */}
-      <div className="rounded-lg overflow-hidden" style={{ height: '62vh', minHeight: 340, boxShadow: '0 4px 20px rgba(0,0,0,0.12)' }}>
+      <div className="rounded-lg overflow-hidden" style={{ height: 'clamp(240px, 45vw, 62vh)', boxShadow: '0 4px 20px rgba(0,0,0,0.12)' }}>
         <MapContainer
           center={[10, 80]}
-          zoom={2}
+          zoom={1}
           style={{ height: '100%', width: '100%', background: `url(${import.meta.env.BASE_URL}無題18.png) center/cover` }}
           dragging={false}
           scrollWheelZoom={false}
