@@ -136,7 +136,7 @@ export default function MapView({ countries, farms, beans, onNavigate }) {
   const countriesWithCoords = countries.filter((c) => c.lat && c.lng);
 
   const breadcrumb = [
-    { label: '🌍 世界', onClick: () => { setLevel('world'); setSelectedCountry(null); setSelectedRegion(null); setFlyTarget({ lat: -25, lng: 133, zoom: 2 }); } },
+    { label: '🌍 世界', onClick: () => { setLevel('world'); setSelectedCountry(null); setSelectedRegion(null); setFlyTarget({ lat: 10, lng: 80, zoom: 2 }); } },
     selectedCountry && { label: `${selectedCountry.flag} ${selectedCountry.name}`, onClick: () => { setLevel('country'); setSelectedRegion(null); setFlyTarget({ lat: selectedCountry.lat, lng: selectedCountry.lng, zoom: selectedCountry.zoom ?? 5 }); } },
     selectedRegion  && { label: selectedRegion, onClick: null },
   ].filter(Boolean);
@@ -169,7 +169,7 @@ export default function MapView({ countries, farms, beans, onNavigate }) {
       {/* マップ */}
       <div className="rounded-lg overflow-hidden" style={{ height: '62vh', minHeight: 340, boxShadow: '0 4px 20px rgba(0,0,0,0.12)' }}>
         <MapContainer
-          center={[-25, 133]}
+          center={[10, 80]}
           zoom={2}
           style={{ height: '100%', width: '100%', background: `url(${import.meta.env.BASE_URL}無題18.png) center/cover` }}
           dragging={false}
