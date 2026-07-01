@@ -172,7 +172,12 @@ export default function MapView({ countries, farms, beans, onNavigate }) {
           center={[-25, 133]}
           zoom={2}
           style={{ height: '100%', width: '100%', background: `url(${import.meta.env.BASE_URL}無題18.png) center/cover` }}
-          scrollWheelZoom
+          dragging={false}
+          scrollWheelZoom={false}
+          doubleClickZoom={false}
+          touchZoom={false}
+          keyboard={false}
+          zoomControl={false}
           maxBounds={[[-90, -180], [90, 180]]}
           maxBoundsViscosity={1.0}
         >
