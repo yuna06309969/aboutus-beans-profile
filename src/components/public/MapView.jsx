@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { MapContainer, GeoJSON, Marker, Popup, useMap, CircleMarker, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { feature } from 'topojson-client';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -102,11 +103,8 @@ export default function MapView({ countries, farms, beans, onNavigate }) {
   useEffect(() => {
     fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/land-110m.json')
       .then(r => r.json())
-      .then(topo => {
-        import('topojson-client').then(({ feature }) => {
-          setWorldGeo(feature(topo, topo.objects.land));
-        });
-      }).catch(() => {});
+      .then(topo => setWorldGeo(feature(topo, topo.objects.land)))
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
